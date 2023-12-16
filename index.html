@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>图片画廊</title>
+  <style>
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .gallery img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      margin: 10px;
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .pagination button {
+      margin: 0 5px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="gallery">
+    <img src="image1.jpg" alt="Image 1">
+    <img src="image2.jpg" alt="Image 2">
+    <img src="image3.jpg" alt="Image 3">
+    <img src="image4.jpg" alt="Image 4">
+    <img src="image5.jpg" alt="Image 5">
+    <!-- 添加更多图片 -->
+  </div>
+
+  <div class="pagination">
+    <button onclick="previousPage()">上一页</button>
+    <button onclick="nextPage()">下一页</button>
+  </div>
+
+  <script>
+    var currentPage = 0;
+    var imagesPerPage = 5; // 每页显示的图片数量
+    var images = document.querySelectorAll('.gallery img');
+    var totalPages = Math.ceil(images.length / imagesPerPage);
+
+    function showPage(page) {
+      var startIndex = page * imagesPerPage;
+      var endIndex = startIndex + imagesPerPage;
+
+      for (var i = 0; i < images.length; i++) {
+        if (i >= startIndex && i < endIndex) {
+          images[i].style.display = 'block';
+        } else {
+          images[i].style.display = 'none';
+        }
+      }
+    }
+
+    function previousPage() {
+      if (currentPage > 0) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    }
+
+    function nextPage() {
+      if (currentPage < totalPages - 1) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    }
+
+    showPage(currentPage);
+  </script>
+</body>
+</html>
